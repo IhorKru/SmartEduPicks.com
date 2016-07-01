@@ -1,18 +1,29 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8" />
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        
         <title>{% block title %}SmartEduPicks | Education where you need it{% endblock %}</title>
+        
+        <!-- Favicon -->
+            
         <!-- CSS files -->
-        {% stylesheets 'bundles/app/css/*' filter='cssrewrite' %}
-            <link rel="stylesheet" href="{{ asset_url }}" />
-        {% endstylesheets %}
-        <!-- JS files -->
+        {% block stylesheets %}
+            {% stylesheets 'bundles/app/css/*' filter='cssrewrite' output='css/compiled/app.css' %}
+                <link rel="stylesheet" href="{{ asset_url }}" />
+            {% endstylesheets %}
+        {% endblock %}
+        
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
+    
     <body>
         {% block body %}{% endblock %}
-        {% javascripts '@AppBundle/Resources/public/js/*' %}
+        {% javascripts '@AppBundle/Resources/public/js/*' output='js/compiled/app.js' %}
             <script src="{{ asset_url }}"></script>
         {% endjavascripts %}
     </body>
