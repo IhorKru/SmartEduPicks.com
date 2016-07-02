@@ -15,18 +15,19 @@ class UnsubscriberType extends AbstractType {
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
-               ->add('emailaddress', EmailType::class, array(
+               ->add('emailaddress', EmailType::class, [
                     'label' => false,
                     'required' => true,
                     'attr' => array(
                         'placeholder' => 'Email Address',
                         'pattern'     => '.{2,}', //minlength
-                        'class' => 'form-field-set'
-                    )))
+                        'class' => 'form-control',
+                        'style' => 'height:41px'
+                    )])
                ->add('submit', SubmitType::class, array(
                     'label' => 'Unsubscribe', 
                     'attr' => array(
-                        'class' => 'sub-btn'
+                        'class' => 'smoothScroll btn btn-danger sb-button'
                     )))
                 ;
     }
