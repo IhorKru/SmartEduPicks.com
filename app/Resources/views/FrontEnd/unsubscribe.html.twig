@@ -1,1 +1,46 @@
-{# empty Twig template #}
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <!-- home section -->
+    <section id="home" style="height: 50vh;">
+        <div class="container" style="margin-bottom:20%; margin-top:25%">
+            <div class="row">
+                <div class="col-md-12 col-sm-12" style="color:black">
+                    <h3>EDUCATION CONSULTING / ONLINE COURCES / FREE WEB TRAININGS</h3>
+                    <hr>
+                </div>
+            </div>
+        </div>		
+    </section>
+    
+    <!-- Unsubscribe -->
+    <section id="about" class="about-un">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Unsubscription</h2>
+                    <p class="lead"> We are really sorry you are leaving us. Please complete your email below to unsubscribe.</p>
+                        <div class="subscribe-form-un" style="width: 50%; margin: 0 auto;">
+                            <div class= "row">
+                                <div class="input-group margin-bottom-sm col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 col-sm-8 col-sm-offset-2 col-xs-12 text-center margin-un">
+                                    <span class="input-group-addon" style="padding-top:12px; padding-bottom:12px;"><i class="fa fa-envelope-o fa-fw"></i></span>
+                                    <input class="form-control" style="height:41px" type="text" placeholder="Email address">
+                                </div>
+                                <div style="margin: 0 auto; padding-bottom: 2vh;">
+                                    <button type="button" class="smoothScroll btn btn-danger sb-button">Unsubscribe</button>
+                                </div>
+                                <div>
+                                    <p class="unders"> Please note: as part of unsubscription process, an email will be sent to above indicated email address asking to confirm your wish to unsubscribe. <br>
+                                            Although all unsubscription requests are handled immidiatly, delays of up to 10 working days may occure.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </section>
+{% endblock %}
+
