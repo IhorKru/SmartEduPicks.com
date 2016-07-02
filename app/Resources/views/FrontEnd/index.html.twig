@@ -12,62 +12,73 @@
             <div class="subscribe-form" >
                 <div class= "row">
                     
-                    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+                    {{ form_start(form1, {'attr': {'novalidate': 'novalidate'}}) }}
                     
                     <div class="input-group margin-bottom-sm col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 col-sm-8 col-sm-offset-2 col-xs-12 text-center margin-f">
                         <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                        {{ form_label(form.firstname) }}
-                        {{ form_widget(form.firstname) }}
+                        {{ form_label(form1.firstname) }}
+                        {{ form_widget(form1.firstname) }}
                     </div>
                     <div class="input-group margin-bottom-sm col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 col-sm-8 col-sm-offset-2 col-xs-12 text-center margin-f">
                         <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                        {{ form_label(form.lastname) }}
-                        {{ form_widget(form.lastname) }}
+                        {{ form_label(form1.lastname) }}
+                        {{ form_widget(form1.lastname) }}
                     </div>	
                     <div class="input-group margin-bottom-sm col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 col-sm-8 col-sm-offset-2 col-xs-12 text-center margin-f">
                         <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
-                        {{ form_label(form.emailaddress) }}
-                        {{ form_widget(form.emailaddress) }}
+                        {{ form_label(form1.emailaddress) }}
+                        {{ form_widget(form1.emailaddress) }}
                     </div>
                     <div class="input-group margin-bottom-sm col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 col-sm-8 col-sm-offset-2 col-xs-12 text-center margin-f">
                         <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
-                        {{ form_label(form.phone) }}
-                        {{ form_widget(form.phone) }}
+                        {{ form_label(form1.phone) }}
+                        {{ form_widget(form1.phone) }}
                     </div>
                     <div class="input-group margin-bottom-sm col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 col-sm-8 col-sm-offset-2 col-xs-12 text-center margin-f dropdown">
                         <span class="input-group-addon"><i class="fa fa-graduation-cap fa-fw"></i></span>
-                        {{ form_label(form.education_level_id) }}
-                        {{ form_widget(form.education_level_id) }}
+                        {{ form_label(form1.education_level_id) }}
+                        {{ form_widget(form1.education_level_id) }}
                     </div>
                     <div class="picklist-style">
                         <div class="checkbox input-group margin-bottom-sm col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
-                            {{ form_widget(form.agreeterms) }}
+                            {{ form_widget(form1.agreeterms) }}
                             <lable> {{ 'I have read and agreed to ' }} <a href="{{ path('terms') }}"> {{ 'SmartEduPics Terms & Conditions' }} </a> </lable>
-                            {{ form_row(form.agreeterms) }}
+                            {{ form_row(form1.agreeterms) }}
                         </div>
                         <div class="checkbox input-group margin-bottom-sm col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
-                            {{ form_widget(form.agreeemails) }}
+                            {{ form_widget(form1.agreeemails) }}
                              <lable> {{ 'I want to get emails from SmartEduPics.com' }} </lable>
-                            {{ form_row(form.agreeemails) }}
+                            {{ form_row(form1.agreeemails) }}
                         </div>
                         <div class="checkbox input-group margin-bottom-sm col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
-                            {{ form_widget(form.agreepartners) }}
+                            {{ form_widget(form1.agreepartners) }}
                             <lable> {{ 'I want to get mails from Partners of SmartEduPics.com' }} </lable>
-                            {{ form_row(form.agreepartners) }}
+                            {{ form_row(form1.agreepartners) }}
                         </div>
                     </div>
-                    <div class="btn btn-dark btn-lg">
-                        {{ form_row(form.submit, { 'label': 'Subscribe to join' }) }}
-                    </div>
+                        {{ form_row(form1.submit, { 'label': 'Subscribe to join' }) }}
                     
-                    {{ form_end(form) }}
+                    {{ form_end(form1) }}
                     
                 </div>
             </div>
         </div>
-    </div>		
+    </div>
 </section>
-
+                    <section>
+                                                                         <div class="window-BG" id="alert">
+                <div class="window">
+                    <div id="alert-title" class="win-img-text">{{ 'Please solve below errors'|trans }}:</div>
+                    <div id="alert-text" class="win-text">
+                        <div style="color: white; text-align: justify;">
+                            {{ form_errors(form1) }}
+                        </div>    
+                    </div>
+                    <div class="window-close win-close-2">{{ 'Close'|trans }}</div>
+                </div>
+            </div>
+                    </section>
+                    
 <!-- work section -->
 <section id="work">
     <div class="container">

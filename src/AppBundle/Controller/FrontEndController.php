@@ -9,8 +9,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Subscriber;
 use AppBundle\Entity\Unsubscriber;
+use AppBundle\Entity\Contact;
 use AppBundle\Form\SubscriberType;
 use AppBundle\Form\UnsubscriberType;
+use AppBundle\Form\ContactType;
 use Swift_Message;
 
 class FrontEndController extends Controller
@@ -24,22 +26,22 @@ class FrontEndController extends Controller
         try{
             $newSubscriber = new Subscriber();
             
-            $form = $this->createForm(SubscriberType::class, $newSubscriber, array(
+            $form1 = $this->createForm(SubscriberType::class, $newSubscriber, array(
                     'action' => $this -> generateUrl('index'),
                     'method' => 'POST'
                 ));
             
-            $form->handleRequest($request);
+            $form1->handleRequest($request);
             
-            if($form->isValid() && $form->isSubmitted()) {
-                $firstname = $form['firstname']->getData();
-                $lastname = $form['lastname']->getData();
-                $emailaddress = $form['emailaddress']->getData();
-                $phone = $form['phone']->getData();
-                $edulevel= $form['education_level_id']->getData();
-                $agreeterms = $form['agreeterms']->getData();
-                $agreeemails = $form['agreeemails']->getData();
-                $agreepartners = $form['agreepartners']->getData();
+            if($form1->isValid() && $form1->isSubmitted()) {
+                $firstname = $form1['firstname']->getData();
+                $lastname = $form1['lastname']->getData();
+                $emailaddress = $form1['emailaddress']->getData();
+                $phone = $form1['phone']->getData();
+                $edulevel= $form1['education_level_id']->getData();
+                $agreeterms = $form1['agreeterms']->getData();
+                $agreeemails = $form1['agreeemails']->getData();
+                $agreepartners = $form1['agreepartners']->getData();
                 
                 $hash = $this->mc_encrypt($newSubscriber->getEmailAddress(), $this->generateKey(16));
                 
@@ -91,10 +93,47 @@ class FrontEndController extends Controller
             $error =1;
         }
         
+        //CONTACT FORM
+        $newContact = new Contact();
+        $form2 = $this->createForm(ContactType::class, $newContact, array(
+            'action' => $this -> generateUrl('index'),
+            'method' => 'POST'
+            ));
+        
+        $form2->handleRequest($request);
+        
+        if($form2->isValid() && $form2->isSubmitted()) {
+             $name = $form2['name'] ->getData();
+             $emailaddress = $form2['emailaddress'] ->getData();
+             $message = $form2['message'] ->getData();
+
+             $newContact ->setName($name);
+             $newContact ->setEmailAddress($emailaddress);
+             $newContact ->setMessage($message);
+
+             //create email
+
+             $message = Swift_Message::newInstance()
+                 ->setSubject('SmartEduPics.com | Question from Website')
+                 ->setFrom($newContact->getEmailAddress())
+                 ->setTo('kruchynenko@gmail.com')
+                 ->setContentType("text/html")
+                 ->setBody($newContact->getMessage());
+
+             //send email
+             $this->get('mailer')->send($message);
+             //generating successfull responce page
+             return $this->redirect($this->generateUrl('index'));
+
+         }
         return $this->render('FrontEnd/index.html.twig', array(
-            'form'=>$form->CreateView(),
+            'form1'=>$form1->CreateView(),
+            'form2'=>$form2->CreateView(),
             'error'=>$error
+             
+            
         ));
+        
     }
     
     /**

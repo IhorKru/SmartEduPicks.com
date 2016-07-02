@@ -21,6 +21,7 @@ class SubscriberType extends AbstractType {
             ->add('firstname', TextType::class, array(
                 'label' => false,
                 'required' => true,
+                'error_bubbling' => true,
                 'attr' => array(
                     'placeholder' => 'First Name',
                     'class' => 'form-control'
@@ -28,6 +29,7 @@ class SubscriberType extends AbstractType {
             ->add('lastname', TextType::class, array(
                 'label' => false,
                 'required' => true,
+                'error_bubbling' => true,
                 'attr' => array(
                     'placeholder' => 'Last Name',
                     'class' => 'form-control'
@@ -35,6 +37,7 @@ class SubscriberType extends AbstractType {
             ->add('emailaddress', EmailType::class, array(
                 'label' => false,
                 'required' => true,
+                'error_bubbling' => true,
                 'attr' => array(
                     'placeholder' => 'Email Address',
                     'pattern'     => '.{2,}',//minlength
@@ -82,7 +85,10 @@ class SubscriberType extends AbstractType {
                 'label' => '',
                 'required' => true))
             ->add('submit', SubmitType::class, array(
-                'label' => 'Sign Up'
+                'label' => 'Sign Up',
+                'attr' => array(
+                    'class' => 'btn btn-dark btn-lg'
+                )
                 ))
              ;
     }
