@@ -672,7 +672,7 @@ contact section
 #contact input {
   height: 40px;
 }
-#contact input[type="submit"] {
+#contact button[type="submit"] {
   background: #00c6d7;
   border: 3px solid #00c6d7;
   letter-spacing: 1px;
@@ -680,7 +680,7 @@ contact section
   height: 50px;
   color: #ffffff;
 }
-#contact input[type="submit"]:hover {
+#contact button[type="submit"]:hover {
   color: #000000;
 }
 

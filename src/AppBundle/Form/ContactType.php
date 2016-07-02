@@ -16,15 +16,15 @@ class ContactType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
         
         $builder
-            ->add('name', TextType::class, array(
+            ->add('name', TextType::class, [
                 'label' => false,
                 'required' => true,
                 'error_bubbling' => true,
                 'attr' => array(
                     'placeholder' => 'Name',
                     'class' => 'form-control'
-                )))
-            ->add('emailaddress', EmailType::class, array(
+                )])
+            ->add('emailaddress', EmailType::class, [
                 'label' => false,
                 'required' => true,
                 'error_bubbling' => true,
@@ -32,20 +32,19 @@ class ContactType extends AbstractType {
                     'placeholder' => 'Email Address',
                     'pattern'     => '.{2,}',//minlength
                     'class' => 'form-control'
-                )))  
-            ->add('message', TextType::class, array(
-                'label' => false,
+                )])  
+            ->add('message', TextType::class, ['label' => false,
                 'required' => true,
                 'error_bubbling' => true,
                 'attr' => array(
+                    'class' => 'form-control',
                     'placeholder' => 'Message',
-                    'pattern'     => '.{2,}', //minlength
-                    'class' => 'form-control'
-                )))
+                    'style' => 'height: 10em;'
+                )])
             ->add('submit', SubmitType::class, array(
                 'label' => 'Send Message',
                 'attr' => array(
-                    'class' => 'btn btn-dark btn-lg'
+                    'class' => 'form-control'
                 )))
              ;
     }

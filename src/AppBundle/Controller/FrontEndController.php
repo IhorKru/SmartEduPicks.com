@@ -130,7 +130,6 @@ class FrontEndController extends Controller
             'form1'=>$form1->CreateView(),
             'form2'=>$form2->CreateView(),
             'error'=>$error
-             
             
         ));
         
@@ -141,7 +140,9 @@ class FrontEndController extends Controller
      */
     public function termsAction(Request $request)
     {
-        return $this->render('FrontEnd/terms.html.twig');
+        return $this->render('FrontEnd/terms.html.twig',array(
+            'form2'=>$form2->CreateView()
+        ));
     }
     
     /**
