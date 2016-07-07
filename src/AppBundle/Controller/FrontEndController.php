@@ -27,10 +27,10 @@ class FrontEndController extends Controller
         try{
             $newSubscriber = new Subscriber();
             
-            $form1 = $this->createForm(SubscriberType::class, $newSubscriber, array(
-                    'action' => $this -> generateUrl('index'),
-                    'method' => 'POST'
-                ));
+            $form1 = $this->createForm(SubscriberType::class, $newSubscriber, [
+                'action' => $this -> generateUrl('index'),
+                'method' => 'POST'
+                ]);
             
             $form1->handleRequest($request);
             
@@ -39,7 +39,7 @@ class FrontEndController extends Controller
                 $lastname = $form1['lastname']->getData();
                 $emailaddress = $form1['emailaddress']->getData();
                 $phone = $form1['phone']->getData();
-                $edulevel= $form1['education_level_id']->getData();
+                $edulevel = $form1['education_level_id']->getData();
                 $agreeterms = $form1['agreeterms']->getData();
                 $agreeemails = $form1['agreeemails']->getData();
                 $agreepartners = $form1['agreepartners']->getData();
@@ -96,10 +96,10 @@ class FrontEndController extends Controller
         
         //CONTACT FORM
         $newContact = new Contact();
-        $form2 = $this->createForm(ContactType::class, $newContact, array(
+        $form2 = $this->createForm(ContactType::class, $newContact, [
             'action' => $this -> generateUrl('index'),
             'method' => 'POST'
-            ));
+            ]);
         
         $form2->handleRequest($request);
         
@@ -127,12 +127,11 @@ class FrontEndController extends Controller
              return $this->redirect($this->generateUrl('index'));
 
          }
-        return $this->render('FrontEnd/index.html.twig', array(
+        return $this->render('FrontEnd/index.html.twig', [
             'form1'=>$form1->CreateView(),
-            'form2'=>$form2->CreateView(),
-            'error'=>$error
-            
-        ));
+                'form2'=>$form2->CreateView(),
+                'error'=>$error
+        ]);
         
     }
     

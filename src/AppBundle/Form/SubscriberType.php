@@ -18,23 +18,23 @@ class SubscriberType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
         
         $builder
-            ->add('firstname', TextType::class, array(
+            ->add('firstname', TextType::class, [
                 'label' => false,
                 'required' => true,
                 'error_bubbling' => true,
                 'attr' => array(
                     'placeholder' => 'First Name',
                     'class' => 'form-control'
-                )))
-            ->add('lastname', TextType::class, array(
+                )])
+            ->add('lastname', TextType::class, [
                 'label' => false,
                 'required' => true,
                 'error_bubbling' => true,
                 'attr' => array(
                     'placeholder' => 'Last Name',
                     'class' => 'form-control'
-                )))
-            ->add('emailaddress', EmailType::class, array(
+                )])
+            ->add('emailaddress', EmailType::class, [
                 'label' => false,
                 'required' => true,
                 'error_bubbling' => true,
@@ -42,8 +42,8 @@ class SubscriberType extends AbstractType {
                     'placeholder' => 'Email Address',
                     'pattern'     => '.{2,}',//minlength
                     'class' => 'form-control'
-                )))  
-            ->add('phone', TextType::class, array(
+                )])  
+            ->add('phone', TextType::class, [
                 'label' => false,
                 'required' => true,
                 'error_bubbling' => true,
@@ -51,45 +51,35 @@ class SubscriberType extends AbstractType {
                     'placeholder' => 'Mobile Phone',
                     'pattern'     => '.{2,}', //minlength
                     'class' => 'form-control'
-                )))
-            ->add('education_level_id', ChoiceType::class, array(
-                'choices' => array(
-                    'High School or equivalent' => 1, 
-                    'Certification' => 2, 
-                    'Vocational' => 3,
-                    'Associate Degree' => 4,
-                    'Bachelors Degree' => 5,
-                    'Masters Degree' => 6,
-                    'Doctorate' => 7,
-                    'Professional' => 8,
-                    'Some College Coursework Completed' => 9,
-                    'Vocational - High School' => 10,
-                    'Vocational - Degree' => 11,
-                    'Some High School Coursework' => 12,
-                    ),
+                )])
+            ->add('education_level_id', ChoiceType::class, [
+                    'choices' => [
+                        'High School or equivalent' => 1, 
+                        'Certification' => 2, 
+                        'Vocational' => 3,
+                        'Associate Degree' => 4,
+                        'Bachelors Degree' => 5,
+                        'Masters Degree' => 6,
+                        'Doctorate' => 7,
+                        'Professional' => 8,
+                        'Some College Coursework Completed' => 9,
+                        'Vocational - High School' => 10,
+                        'Vocational - Degree' => 11,
+                        'Some High School Coursework' => 12,
+                    ],
                 'label' => false,
                 'required' => true,
                 'error_bubbling' => true,
                 'placeholder' => 'Current Education Level',
-                'attr' => array(
-                    'class' => 'form-control'
-                )
-                ))
-            ->add('agreeterms', CheckboxType::class, array(
-                'label' => '',
-                'required' => true))
-            ->add('agreeemails', CheckboxType::class, array(
-                'label' => '',
-                'required' => true))
-            ->add('agreepartners', CheckboxType::class, array(
-                'label' => '',
-                'required' => true))
-            ->add('submit', SubmitType::class, array(
+                'attr' => ['class' => 'form-control']
+        ])
+            ->add('agreeterms', CheckboxType::class, ['label' => '','required' => true])
+            ->add('agreeemails', CheckboxType::class, ['label' => '','required' => true])
+            ->add('agreepartners', CheckboxType::class, ['label' => '','required' => true])
+            ->add('submit', SubmitType::class, [
                 'label' => 'Sign Up',
-                'attr' => array(
-                    'class' => 'btn btn-dark btn-lg'
-                )
-                ))
+                'attr' => ['class' => 'btn btn-dark btn-lg']
+        ])
              ;
     }
     
@@ -97,9 +87,7 @@ class SubscriberType extends AbstractType {
     * @param OptionsResolverInterface $resolver
     */
     public function configureOptions(OptionsResolver $resolver) {
-        $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Subscriber'
-        ));
+        $resolver->setDefaults(['data_class' => 'AppBundle\Entity\Subscriber']);
     }
     /**
      * @return string

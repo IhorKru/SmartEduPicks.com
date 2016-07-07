@@ -24,7 +24,7 @@ class Subscriber
 
     /**
      * @var string
-     *
+     * 
      * @Assert\NotBlank (message="Complete First Name field")
      * @ORM\Column(name="firstname", type="string", length=255)
      */
