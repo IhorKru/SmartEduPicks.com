@@ -4,11 +4,11 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class SubscriberType extends AbstractType {
     /**
@@ -22,37 +22,23 @@ class SubscriberType extends AbstractType {
                 'label' => false,
                 'required' => true,
                 'error_bubbling' => true,
-                'attr' => array(
-                    'placeholder' => 'First Name',
-                    'class' => 'form-control'
-                )])
+                'attr' => ['placeholder' => 'First Name', 'class' => 'form-control']])
             ->add('lastname', TextType::class, [
                 'label' => false,
                 'required' => true,
                 'error_bubbling' => true,
-                'attr' => array(
-                    'placeholder' => 'Last Name',
-                    'class' => 'form-control'
-                )])
+                'attr' => ['placeholder' => 'Last Name', 'class' => 'form-control']])
             ->add('emailaddress', EmailType::class, [
                 'label' => false,
                 'required' => true,
                 'error_bubbling' => true,
-                'attr' => array(
-                    'placeholder' => 'Email Address',
-                    'pattern'     => '.{2,}',//minlength
-                    'class' => 'form-control'
-                )])  
+                'attr' => ['placeholder' => 'Email Address', 'pattern' => '.{2,}', 'class' => 'form-control']])  
             ->add('phone', TextType::class, [
                 'label' => false,
                 'required' => true,
                 'error_bubbling' => true,
-                'attr' => array(
-                    'placeholder' => 'Mobile Phone',
-                    'pattern'     => '.{2,}', //minlength
-                    'class' => 'form-control'
-                )])
-            ->add('education_level_id', ChoiceType::class, [
+                'attr' => ['placeholder' => 'Mobile Phone', 'pattern'=> '.{2,}', 'class' => 'form-control']])
+            ->add('educationlevelid', ChoiceType::class, [
                     'choices' => [
                         'High School or equivalent' => 1, 
                         'Certification' => 2, 
@@ -71,23 +57,18 @@ class SubscriberType extends AbstractType {
                 'required' => true,
                 'error_bubbling' => true,
                 'placeholder' => 'Current Education Level',
-                'attr' => ['class' => 'form-control']
-        ])
-            ->add('agreeterms', CheckboxType::class, ['label' => '','required' => true])
-            ->add('agreeemails', CheckboxType::class, ['label' => '','required' => true])
-            ->add('agreepartners', CheckboxType::class, ['label' => '','required' => true])
+                'attr' => ['class' => 'form-control']])
+            ->add('optindetails', CollectionType::class, ['entry_type' => SubscriberOptInType::class])
             ->add('submit', SubmitType::class, [
                 'label' => 'Sign Up',
-                'attr' => ['class' => 'btn btn-dark btn-lg']
-        ])
-             ;
+                'attr' => ['class' => 'btn btn-dark btn-lg']]);
     }
     
     /**
     * @param OptionsResolverInterface $resolver
     */
     public function configureOptions(OptionsResolver $resolver) {
-        $resolver->setDefaults(['data_class' => 'AppBundle\Entity\Subscriber']);
+        $resolver->setDefaults(['data_class' => 'AppBundle\Entity\SubscriberDetails']);
     }
     /**
      * @return string
