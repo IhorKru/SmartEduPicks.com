@@ -313,7 +313,7 @@ class SubscriberDetails
         $this->optindetails = $optindetails;
     }
     
-        /**
+    /**
      * Set sourceid
      *
      * @param integer $sourceid
@@ -337,4 +337,3 @@ class SubscriberDetails
         return $this->sourceid;
     }
 }
-
