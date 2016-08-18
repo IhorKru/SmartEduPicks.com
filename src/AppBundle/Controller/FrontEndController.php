@@ -15,7 +15,6 @@ use AppBundle\Entity\SubscriberOptOutDetails;
 use AppBundle\Entity\Contact;
 
 use AppBundle\Form\SubscriberType;
-use AppBundle\Form\SubscriberOptInType;
 use AppBundle\Form\SubscriberOptOutType;
 use AppBundle\Form\ContactType;
 
@@ -101,15 +100,15 @@ class FrontEndController extends Controller
                 $urlButton = $this->generateEmailUrl(($request->getLocale() === 'ru' ? '/ru/' : '/') . 'verify/' . $newSubscriber->getEmailAddress() . '?id=' . urlencode($hash));
                 $message = Swift_Message::newInstance()
                     ->setSubject('SmartEduPics.com | Complete Registration')
-                    ->setFrom(array('relaxstcom@gmail.com' => 'SmartEduPics Support Team'))
+                    ->setFrom(['relaxstcom@gmail.com' => 'SmartEduPics Support Team'])
                     ->setTo($newSubscriber->getEmailAddress())
                     ->setContentType("text/html")
-                    ->setBody($this->renderView('FrontEnd/emailSubscribe.html.twig', array(
+                    ->setBody($this->renderView('FrontEnd/emailSubscribe.html.twig', [
                             'url' => $urlButton, 
                             'name' => $newSubscriber->getFirstname(),
                             'lastname' => $newSubscriber->getLastname(),
                             'email' => $newSubscriber->getEmailAddress()
-                        )));
+                            ]));
 
                 //send email
                 $this->get('mailer')->send($message);
@@ -186,7 +185,7 @@ class FrontEndController extends Controller
         if(!$newOptInDetails) {
             throw $this->createNotFoundException('U bettr go awai!');
         } else {
-            $newOptInDetails = $em ->getRepository('AppBundle:SubscriberOptInDetails') ->findOneBy(['user' => $userid]);
+            $newOptInDetails = $em ->getRepository('AppBundle:SubscriberOptInDetails') ->findOneBy(['user' => $userid, 'resourceid' => 2]);
             $newOptInDetails ->setOptindate(new DateTime());
             $newOptInDetails ->setOptinip($_SERVER['REMOTE_ADDR']);
             $em->persist($newOptInDetails);
@@ -201,13 +200,11 @@ class FrontEndController extends Controller
     public function termsAction(Request $request)
     {
         $newContact = new Contact();
-        $form2 = $this->createForm(ContactType::class, $newContact, array(
+        $form2 = $this->createForm(ContactType::class, $newContact, [
             'action' => $this -> generateUrl('index'),
-            'method' => 'POST'
-            ));
-        return $this->render('FrontEnd/terms.html.twig',array(
-            'form2'=>$form2->CreateView()
-        ));
+            'method' => 'POST']);
+        return $this->render('FrontEnd/terms.html.twig',  [
+            'form2'=>$form2->CreateView()]);
     }
     
     /**
@@ -216,14 +213,12 @@ class FrontEndController extends Controller
     public function privacyAction(Request $request)
     {
         $newContact = new Contact();
-        $form2 = $this->createForm(ContactType::class, $newContact, array(
+        $form2 = $this->createForm(ContactType::class, $newContact, [
             'action' => $this -> generateUrl('index'),
             'method' => 'POST'
-            ));
-        
+            ]);
         return $this->render('FrontEnd/privacy.html.twig',[
-            'form2'=> $form2 -> createView()
-        ]);
+            'form2'=> $form2 -> createView()]);
     }
     
     /**
@@ -232,11 +227,9 @@ class FrontEndController extends Controller
     public function thankuregAction(Request $request)
     {
         $newContact = new Contact();
-        $form2 = $this->createForm(ContactType::class, $newContact, array(
+        $form2 = $this->createForm(ContactType::class, $newContact, [
             'action' => $this -> generateUrl('index'),
-            'method' => 'POST'
-            ));
-        
+            'method' => 'POST']);
         return $this->render('FrontEnd/thankureg.html.twig',[
             'form2'=> $form2 -> createView()
         ]);
@@ -321,10 +314,9 @@ class FrontEndController extends Controller
     public function sorryunsubscribeAction(Request $request)
     {   
         $newContact = new Contact();
-        $form2 = $this->createForm(ContactType::class, $newContact, array(
+        $form2 = $this->createForm(ContactType::class, $newContact, [
             'action' => $this -> generateUrl('index'),
-            'method' => 'POST'
-            ));
+            'method' => 'POST']);
         return $this->render('FrontEnd/sorryunsubscribe.html.twig', [
             'form2' => $form2 -> CreateView()
         ]);
