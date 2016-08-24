@@ -100,7 +100,7 @@ class FrontEndController extends Controller
                 $urlButton = $this->generateEmailUrl(($request->getLocale() === 'ru' ? '/ru/' : '/') . 'verify/' . $newSubscriber->getEmailAddress() . '?id=' . urlencode($hash));
                 $message = Swift_Message::newInstance()
                     ->setSubject('SmartEduPics.com | Complete Registration')
-                    ->setFrom(['relaxstcom@gmail.com' => 'SmartEduPics Support Team'])
+                    ->setFrom(['support@smartedupics.com' => 'SmartEduPics Support Team'])
                     ->setTo($newSubscriber->getEmailAddress())
                     ->setContentType("text/html")
                     ->setBody($this->renderView('FrontEnd/emailSubscribe.html.twig', [
@@ -147,7 +147,7 @@ class FrontEndController extends Controller
              $message = Swift_Message::newInstance()
                  ->setSubject('SmartEduPics.com | Question from Website')
                  ->setFrom($newContact->getEmailAddress())
-                 ->setTo('kruchynenko@gmail.com')
+                 ->setTo('support@smartedupics.com')
                  ->setContentType("text/html")
                  ->setBody($newContact->getMessage());
 
@@ -280,7 +280,7 @@ class FrontEndController extends Controller
                     $urlButton = $this->generateEmailUrl(($request->getLocale() === 'ru' ? '/ru/' : '/') . 'verify/unsubscribe/' . $subscriber->getEmailAddress() . '?id=' . urlencode($subscriber->getHash()));
                     $message = Swift_Message::newInstance()
                         ->setSubject('SmartEduPics.com | We are sorry you are leaving us')
-                        ->setFrom(['relaxstcom@gmail.com' => 'Jobbery Support Team'])
+                        ->setFrom(['support@smartedupics.com' => 'SmartEduPics Support Team'])
                         ->setTo($subscriber->getEmailAddress())
                         ->setContentType("text/html")
                         ->setBody($this->renderView('FrontEnd/emailUnsubscribe.html.twig', [
@@ -341,6 +341,6 @@ class FrontEndController extends Controller
     }
     
     private function generateEmailUrl($url) {
-        return "http://localhost:8888" . $this->container->get('router')->getContext()->getBaseUrl() . $url;
+        return "http://smartedupics.com" . $this->container->get('router')->getContext()->getBaseUrl() . $url;
     }
 }
