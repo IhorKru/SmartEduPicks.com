@@ -164,7 +164,7 @@ class FrontEndController extends Controller
             $newContact ->setMessage($message);
             $em->persist($newContact);
             $em->flush();
-                    
+            
              //create email
 
              $message = Swift_Message::newInstance()
