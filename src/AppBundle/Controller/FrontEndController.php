@@ -56,7 +56,7 @@ class FrontEndController extends Controller
                     $agreepartners = $subForm['agreepartners']->getData();
                 }
                 $hash = $this->mc_encrypt($newSubscriber->getEmailAddress(), $this->generateKey(16));
-                $em = $this->getDoctrine()->getManager('custom');
+                $em = $this->getDoctrine()->getManager();
                 $exsSubscriber = $em->getRepository('AppBundle:SubscriberDetails') ->findOneBy(['emailaddress' => $emailaddress]);
                 if(!$exsSubscriber) {
                     //if user does not exist -> collect user details
@@ -153,22 +153,24 @@ class FrontEndController extends Controller
         $form2->handleRequest($request);
         $em = $this ->getDoctrine() ->getManager();
         if($form2->isValid() && $form2->isSubmitted()) {
-             $name = $form2['name'] ->getData();
-             $emailaddress = $form2['emailaddress'] ->getData();
-             $message = $form2['message'] ->getData();
+            $name = $form2['name'] ->getData();
+            $emailaddress = $form2['emailaddress'] ->getData();
+            $message = $form2['message'] ->getData();
              
-             $query4 = $em ->createQuery('SELECT MAX(m.id) FROM AppBundle:Contact m');
-             $newContact ->setId($query4->getSingleScalarResult() + 1);
-             $newContact ->setName($name);
-             $newContact ->setEmailAddress($emailaddress);
-             $newContact ->setMessage($message);
-
+            $query4 = $em ->createQuery('SELECT MAX(m.id) FROM AppBundle:Contact m');
+            $newContact ->setId($query4->getSingleScalarResult() + 1);
+            $newContact ->setName($name);
+            $newContact ->setEmailAddress($emailaddress);
+            $newContact ->setMessage($message);
+            $em->persist($newContact);
+            $em->flush();
+                    
              //create email
 
              $message = Swift_Message::newInstance()
                  ->setSubject('SmartEduPics.com | Question from Website')
                  ->setFrom($newContact->getEmailAddress())
-                 ->setTo('support@smartedupics.com')
+                 ->setTo('m@mediaff.com')
                  ->setContentType("text/html")
                  ->setBody($newContact->getMessage());
 
@@ -194,7 +196,7 @@ class FrontEndController extends Controller
         $newOptInDetails = new SubscriberOptInDetails();
         $subscriber = new SubscriberDetails();
         
-        $em = $this->getDoctrine()->getManager('custom');
+        $em = $this->getDoctrine()->getManager();
         $subscriber = $em->getRepository('AppBundle:SubscriberDetails') ->findOneBy(['emailaddress' => $emailaddress]);
         $userid = $subscriber ->getId();
 
@@ -257,7 +259,7 @@ class FrontEndController extends Controller
      */
     public function verifyUnsubscribeAction(Request $request, $emailaddress) {
         $newOptOutDetails = new SubscriberOptOutDetails();
-        $em = $this->getDoctrine()->getManager('custom');
+        $em = $this->getDoctrine()->getManager();
         $subscriber = $em->getRepository('AppBundle:SubscriberDetails') ->findOneBy(['emailaddress' => $emailaddress]);
         
         if(!$subscriber) {
@@ -291,7 +293,7 @@ class FrontEndController extends Controller
         $form->handleRequest($request);
         
         if($form->isValid() && $form->isSubmitted()) {
-            $em = $this->getDoctrine()->getManager('custom');
+            $em = $this->getDoctrine()->getManager();
             $subscriber = $em->getRepository('AppBundle:SubscriberDetails')->findOneByEmailaddress($unsubscriber->getEmailaddress());
 
             if($subscriber) {
