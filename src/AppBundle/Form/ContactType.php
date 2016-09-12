@@ -20,32 +20,23 @@ class ContactType extends AbstractType {
                 'label' => false,
                 'required' => true,
                 'error_bubbling' => true,
-                'attr' => array(
-                    'placeholder' => 'Name',
-                    'class' => 'form-control'
-                )])
+                'attr' => ['placeholder' => 'Name',
+                    'class' => 'form-control']])
             ->add('emailaddress', EmailType::class, [
                 'label' => false,
                 'required' => true,
                 'error_bubbling' => true,
-                'attr' => array(
+                'attr' => [
                     'placeholder' => 'Email Address',
                     'pattern'     => '.{2,}',//minlength
-                    'class' => 'form-control'
-                )])  
-            ->add('message', TextType::class, ['label' => false,
+                    'class' => 'form-control']])  
+            ->add('message', TextType::class, [
+                'label' => false,
                 'required' => true,
                 'error_bubbling' => true,
-                'attr' => array(
-                    'class' => 'form-control',
-                    'placeholder' => 'Message',
-                    'style' => 'height: 10em;'
-                )])
-            ->add('submit', SubmitType::class, array(
-                'label' => 'Send Message',
-                'attr' => array(
-                    'class' => 'form-control'
-                )))
+                'attr' => ['class' => 'form-control', 'placeholder' => 'Message', 'style' => 'height: 10em;']])
+            ->add('submit', SubmitType::class, ['label' => 'Send Message',
+                'attr' => ['class' => 'form-control']])
              ;
     }
     
@@ -53,9 +44,7 @@ class ContactType extends AbstractType {
     * @param OptionsResolverInterface $resolver
     */
     public function configureOptions(OptionsResolver $resolver) {
-        $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Contact'
-        ));
+        $resolver->setDefaults(['data_class' => 'AppBundle\Entity\Contact']);
     }
     /**
      * @return string
